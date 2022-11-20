@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
+using WebApi.DataBase;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +12,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+IConfiguration configuration = new ConfigurationBuilder()
+   .AddJsonFile("appsettings.json", true, true)
+   .Build();
+
+builder.Services.AddDbContext<EmployeeContext>(options =>
+               options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 
 var app = builder.Build();
