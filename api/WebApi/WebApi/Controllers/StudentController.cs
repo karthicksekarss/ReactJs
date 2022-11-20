@@ -18,6 +18,13 @@ namespace WebApi.Controllers
             return students;
         }
 
+        [HttpGet]
+        [Route("id")]
+        public Student Get(int id)
+        {
+            return db.Students.FirstOrDefault(x => x.id == id);
+        }
+
         [HttpPost]
         [Route("Create")]
         public Student Create(Student student)
