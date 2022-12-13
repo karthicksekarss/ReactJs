@@ -12,8 +12,11 @@ export default function Student() {
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     (async () => {
-      const result = await axios("https://localhost:7248/Student");
-      setData(result.data);
+      await axios("https://localhost:7248/Student").then(responce =>
+      {
+        setData(responce.data);
+      }).catch();
+     
     })();
   }, []);
    
